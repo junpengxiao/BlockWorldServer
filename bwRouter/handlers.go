@@ -16,7 +16,7 @@ var usage = `Welcome!
 /upload: return a webpage. To test server locally, use this page to upload a JSON file
 `
 
-func obtainJSON(w http.ResponseWriter, r *http.Request) (bwStruct.Data, error) {
+func obtainJSON(w http.ResponseWriter, r *http.Request) (bwStruct.BWData, error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		panic(err)
@@ -24,7 +24,7 @@ func obtainJSON(w http.ResponseWriter, r *http.Request) (bwStruct.Data, error) {
 	if err := r.Body.Close(); err != nil {
 		panic(err)
 	}
-	var data bwStruct.Data
+	var data bwStruct.BWData
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
@@ -80,7 +80,7 @@ func ViewUpload(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 	body, err := ioutil.ReadAll(file)
-	var data bwStruct.Data
+	var data bwStruct.BWData
 	err = json.Unmarshal(body, &data)
 	fmt.Fprint(w, data)
 }
