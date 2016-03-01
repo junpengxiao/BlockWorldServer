@@ -1,4 +1,4 @@
-package main
+package bwStruct
 
 type Block struct {
 	Id  int        `json:"id"`

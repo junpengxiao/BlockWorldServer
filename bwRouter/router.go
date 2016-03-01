@@ -1,4 +1,4 @@
-package main
+package bwRouter
 
 import (
 	"net/http"

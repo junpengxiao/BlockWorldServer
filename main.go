@@ -1,13 +1,14 @@
 package main
 
 import (
+	"github.com/junpengxiao/BlockWorldServer/bwRouter"
 	"log"
 	"net/http"
 )
 
 func main() {
 
-	router := NewRouter()
+	router := bwRouter.NewRouter()
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
