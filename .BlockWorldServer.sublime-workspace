@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"han",
+				"Handle	 ƒ"
+			],
+			[
+				"B",
+				"BWData	struct ʈ"
+			],
+			[
+				"vec",
+				"vector	[]int ν"
+			],
+			[
+				"token",
+				"tokens	 ν"
+			],
+			[
+				"sc",
+				"ScanWords	advance int, token []byte, err error ƒ"
+			],
+			[
 				"fp",
 				"Fprint	n int, err error ƒ"
 			],
@@ -130,10 +150,6 @@
 			[
 				"reson",
 				"ResponseWriter	interface ¡"
-			],
-			[
-				"han",
-				"HandleFunc	 ƒ"
 			],
 			[
 				"sci",
@@ -367,14 +383,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "bwRouter/handlers.go",
-			"settings":
-			{
-				"buffer_size": 2500,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -416,14 +424,24 @@
 	},
 	"file_history":
 	[
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/main.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/router.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/logger.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelSample.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwStruct/bwStruct.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/sampleJSON/input.json",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/sampleJSON/output.json",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/bwModel.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/handlers.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelA.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/processor.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/routes.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/blockworld.sublime-project",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/test/datastruct/datastruct.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/test/main.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/test/struct/datastruct.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/test/struct/struct.go",
-		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwStruct/bwStruct.go",
 		"/Users/xiaojunpeng/workspace/GroundedLanguage/BlockWorld/ModelA_data.py",
-		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/main.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/processor.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/handlers.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/input.json",
@@ -538,6 +556,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			",0.1,",
+			"]",
+			"\"id\":\\d+,\"loc\":\\[",
+			"\\\"id\\\"\\:?,\\\"loc\\\":\\[",
+			"\"id\":?,\"loc\":[",
+			"\\},\\{",
+			"},{",
 			"editdistance",
 			"compile",
 			"sponehot",
@@ -577,6 +602,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			",",
+			"",
+			"\\n"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -589,33 +617,6 @@
 		{
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "bwRouter/handlers.go",
-					"settings":
-					{
-						"buffer_size": 2500,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2097,
-								2097
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],

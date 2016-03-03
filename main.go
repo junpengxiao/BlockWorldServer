@@ -1,14 +1,13 @@
-package main
+package hello
 
 import (
-	"github.com/junpengxiao/BlockWorldServer/bwRouter"
-	"log"
+	"bwRouter"
 	"net/http"
 )
 
-func main() {
+func init() {
 
 	router := bwRouter.NewRouter()
-
-	log.Fatal(http.ListenAndServe(":8080", router))
+	http.Handle("/", router)
+	//	log.Fatal(http.ListenAndServe(":8080", router))
 }
