@@ -1,4 +1,4 @@
-/*package bwModel
+package bwModel
 
 import (
 	"bufio"
@@ -59,4 +59,3 @@ func ModelAProcessor(input bwStruct.BWData) bwStruct.BWData {
 	//predict(vector)
 	return input
 }
-*/

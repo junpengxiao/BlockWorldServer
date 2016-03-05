@@ -11,7 +11,8 @@ type modelProcess func(bwStruct.BWData) bwStruct.BWData
 var processor modelProcess
 
 func init() {
-	processor = ModelSampleProcessor
+	//processor = ModelSampleProcessor
+	processor = ModelAProcessor
 }
 
 func ProcessData(input bwStruct.BWData) bwStruct.BWData {

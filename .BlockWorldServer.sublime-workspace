@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"han",
+				"Handle	 ƒ"
+			],
+			[
 				"B",
 				"BWData	struct ʈ"
 			],
@@ -146,10 +150,6 @@
 			[
 				"reson",
 				"ResponseWriter	interface ¡"
-			],
-			[
-				"han",
-				"HandleFunc	 ƒ"
 			],
 			[
 				"sci",
@@ -424,17 +424,19 @@
 	},
 	"file_history":
 	[
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/bwModel.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelSample.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/main.go",
+		"/Users/xiaojunpeng/Downloads/subjsontoai.json",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/handlers.go",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/app.yaml",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/router.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/logger.go",
-		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelSample.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwStruct/bwStruct.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/sampleJSON/input.json",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/sampleJSON/output.json",
-		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/bwModel.go",
-		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/handlers.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelA.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/processor.go",
-		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/main.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/routes.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/blockworld.sublime-project",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/test/datastruct/datastruct.go",
@@ -556,6 +558,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"usage",
 			",0.1,",
 			"]",
 			"\"id\":\\d+,\"loc\":\\[",
