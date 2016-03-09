@@ -19,7 +19,7 @@ end
 server = listen(8081)
 while true
 	sock = accept(server)
-	begin 
+	@async begin 
 		try
 			while true
 				str = readline(sock)
