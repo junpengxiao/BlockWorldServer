@@ -19,7 +19,8 @@ function convert(str)
     for i in tmp
         push!(ret, parse(Int,i))
     end
-    return ret
+    #Change it into 2 demintional array( Matrix )
+    return reshape(ret, 1, length(ret)) 
 end
 
 #load tradning model
@@ -57,7 +58,7 @@ function predict(f, data; xrange=1:79, padding=1, xvocab=326, ftype=Float32, xsp
         push!(ypred, indmax(to_host(y)))
         reset!(f)
     end
-    println(ypred)
+    return ypred[1]
 end
 
 loadmodels(modelnames[1],modelnames[2], modelnames[3])
@@ -71,11 +72,11 @@ while true
                 str = readline(sock)
                 println(str)
                 data = convert(str)
-                result = Any[]
-                push!(result,predict(net1, data))
-                push!(result,predict(net2, data))
-                push!(result,predict(net3, data))
+                result=predict(net1, data)
+                result=string(result," ",predict(net2,data))
+                result=string(result," ",predict(net3,data))
                 println(sock, result)
+                println("Predict Finished")
             end
         catch err 
         end

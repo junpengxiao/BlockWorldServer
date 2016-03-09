@@ -9,7 +9,6 @@ function main(args)
     s = ArgParseSettings()
     s.exc_handler=ArgParse.debug_handler
     @add_arg_table s begin
-        ("--datafile"; default="test.data")
         ("--loadfile"; help="initialize model from file"; default="ModelA.jld")
         ("--target"; arg_type=Int; default=1; help="which target to predict: 1:source,2:target,3:direction")
         ("--nx"; arg_type=Int; default=79; help="number of input columns in data")
@@ -21,14 +20,13 @@ function main(args)
         ("--ftype"; default = "Float32"; help="floating point type to use: Float32 or Float64")
     end
     isa(args, AbstractString) && (args=split(args))
-    o = parse_args(args, s; as_symbols=true); println(o)
+    o = parse_args(args, s; as_symbols=true);
     o[:ftype] = eval(parse(o[:ftype]))
-    Knet.gpu(false)
 
     # Read data files: 6003x82, 855x82
     #global rawdata = map(f->readdlm(f,Int), o[:datafiles])
     #Read predict data file
-    global rawdata = readdlm("test.data",Int)
+    global rawdata = readdlm(STDIN,Int)
     println(rawdata)
 
 
@@ -36,7 +34,7 @@ function main(args)
     xrange = 1:o[:nx]
     yrange = (o[:nx] + o[:target]):(o[:nx] + o[:target])
     yvocab = o[:yvocab][o[:target]]
-    global data = minibatch(rawdata, xrange, yrange, o[:batchsize]; xvocab=o[:xvocab], yvocab=yvocab, ftype=o[:ftype], xsparse=o[:xsparse])
+    #global data = minibatch(rawdata, xrange, yrange, o[:batchsize]; xvocab=o[:xvocab], yvocab=yvocab, ftype=o[:ftype], xsparse=o[:xsparse])
     #global data = map(rawdata) do d
     #    minibatch(d, xrange, yrange, o[:batchsize]; xvocab=o[:xvocab], yvocab=yvocab, ftype=o[:ftype], xsparse=o[:xsparse])
     #end
