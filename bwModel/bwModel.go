@@ -2,7 +2,7 @@ package bwModel
 
 import (
 	"github.com/junpengxiao/BlockWorldServer/bwStruct"
-	"os/exec"
+	//"os/exec"
 )
 
 //function signature. used for different models. To change model
