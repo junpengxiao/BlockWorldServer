@@ -1,1 +1,0 @@
-data = readdlm(STDIN,Int)

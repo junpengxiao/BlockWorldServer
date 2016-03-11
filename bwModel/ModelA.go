@@ -20,15 +20,17 @@ var (
 	vectorLen  = 79                //the input length. If the sentence is not long enough, use 1 to fill out blanks
 	unkown     = "<unk>"
 	//variables used in model A
-	delta                    = 0.5 / 3
-	ErrPredictionError       = errors.New("Prediction didn't return a tuple that contains 3 elements")
-	ErrBlockIndexCorssBorder = errors.New("Prediction returned index is not listed in world description")
-	ErrPredictionCollision   = errors.New("Prediction collide with other block")
+	delta                  = 0.5 / 3
+	ErrPredictionError     = errors.New("Prediction didn't return a tuple that contains 3 elements")
+	ErrBlockIndexNotFound  = errors.New("Prediction returned index is not listed in world description")
+	ErrPredictionCollision = errors.New("Prediction collide with other block")
+	port                   = 8081
 ) //TODO use .config to configure vectorLen etc, not wire coded
 
 func init() {
+	dictionary = make(map[string]int)
 	dictionary[unkown] = 1
-	file, err := os.Open("Vocab.txt")
+	file, err := os.Open("bwModel/VocabA.txt")
 	if err != nil {
 		log.Fatal("In ModelA Init, ", err)
 	}
@@ -48,28 +50,39 @@ func init() {
 			dictionary[word] = len(dictionary) + 1
 		}
 	}
-	tok := tokenizer.NewTreebankWordTokenizer()
+	tok = tokenizer.NewTreebankWordTokenizer()
+}
+
+func FindBlockByID(world []bwStruct.BWBlock, id int) (int, error) {
+	for i, v := range world {
+		if v.Id == id {
+			return i, nil
+		}
+	}
+	return -1, ErrBlockIndexNotFound
 }
 
 func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWData) {
 	results := strings.Split(result, " ")
 	if len(results) != 3 {
 		ret.Error = ErrPredictionError.Error()
-		return
+		return ret
 	}
-	nums := make([]int, len(result))
+	results[2] = results[2][0 : len(results[2])-1] //removr /n which will cause Atoi error
+	nums := make([]int, len(results))
 	for i, v := range results {
-		nums[i] = strconv.Atoi(v)
+		nums[i], _ = strconv.Atoi(v)
+		log.Println("results ", v, " nums: ", nums)
 	}
-	source, err := FindBlockByID(input, nums[0])
+	source, err := FindBlockByID(input.World, nums[0])
 	if err != nil {
-		ret.Error = ErrBlockIndexCorssBorder.Error()
-		return
+		ret.Error = ErrBlockIndexNotFound.Error()
+		return ret
 	}
-	target, err := FindBlockByID(input, nums[1])
+	target, err := FindBlockByID(input.World, nums[1])
 	if err != nil {
-		ret.Error = ErrBlockIndexCorssBorder.Error()
-		return
+		ret.Error = ErrBlockIndexNotFound.Error()
+		return ret
 	}
 	predict := input.World[target]
 	predict.Id = source
@@ -85,21 +98,23 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 	case 4: //N  *+
 		predict.Loc[2] += delta
 	case 5: //NE ++
-		predict[0] += delta
-		predict[2] += delta
+		predict.Loc[0] += delta
+		predict.Loc[2] += delta
 	case 6: //E  +*
-		predict[0] += delta
+		predict.Loc[0] += delta
 	case 7: //SE +-
-		predict[0] += delta
-		predict[2] -= delta
+		predict.Loc[0] += delta
+		predict.Loc[2] -= delta
 	case 8: //S*-
-		predict[2] -= delta
+		predict.Loc[2] -= delta
 	}
-	if !NoCollision(predict[0], predict[1], predict[2], input.World) {
+
+	if !NoCollision(predict.Loc[0], predict.Loc[1], predict.Loc[2], input.World) {
 		ret.Error = ErrPredictionCollision.Error()
 	}
 	ret.World = append(ret.World, predict)
 	ret.Version = input.Version
+	return ret
 }
 
 func ModelAProcessor(input bwStruct.BWData) bwStruct.BWData {
@@ -112,21 +127,25 @@ func ModelAProcessor(input bwStruct.BWData) bwStruct.BWData {
 			vector = append(vector, dictionary[unkown])
 		}
 	}
-	for len(vector) != vectorLen {
+	for len(vector) < vectorLen {
 		vector = append(vector, dictionary[unkown])
 	}
 	// put vector into model and grab the result
-	conn, err := net.Dial("tcp", "localhost:8081")
+	conn, err := net.Dial("tcp", "localhost:"+strconv.Itoa(port))
 	if err != nil {
 		log.Println(err)
-		input.Error = err
+		input.Error = err.Error()
 		return input
+	}
+	str := strconv.Itoa(vector[0])
+	for i := 1; i != len(vector); i++ {
+		str = str + " " + strconv.Itoa(vector[i])
 	}
 	fmt.Fprintln(conn, str)
 	result, err := bufio.NewReader(conn).ReadString('\n')
 	if err != nil {
 		log.Println(err)
-		input.Error = err
+		input.Error = err.Error()
 		return input
 	}
 	conn.Close()

@@ -5,9 +5,9 @@ import (
 )
 
 var (
-	delta = 0.5 / 3
-	dx    = []float64{-delta, 0, delta}
-	dz    = []float64{-delta, 0, delta}
+	//delta = 0.5 / 3 Removed due to defined in Model A
+	dx = []float64{-delta, 0, delta}
+	dz = []float64{-delta, 0, delta}
 )
 
 func check(x1, x2, d float64) bool {

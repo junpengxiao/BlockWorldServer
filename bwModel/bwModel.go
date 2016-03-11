@@ -14,8 +14,10 @@ var processor modelProcess
 func init() {
 	//processor = ModelSampleProcessor
 	processor = ModelAProcessor
-	//launch Julia server to load model into memory
-	go exec.Command("julia", "ModelA.jl")
+	//TODO : launch Julia server to load model into memory
+	//But for now lanch it manully
+	//go exec.Command("julia", "bwModel/test/testserver.jl")
+	//TODO: print julia server feedback
 
 }
 
