@@ -9,6 +9,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -75,7 +76,7 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 		nums[i], _ = strconv.Atoi(v)
 		log.Println("results ", v, " nums: ", nums)
 	}
-	_, err := FindBlockByID(input.World, nums[0])
+	source, err := FindBlockByID(input.World, nums[0])
 	if err != nil {
 		ret.Error = ErrBlockIndexNotFound.Error()
 		return ret
@@ -109,15 +110,18 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 	case 8: //S*-
 		predict.Loc[2] -= delta
 	}
-	if predict.Loc[0]<threshold {
+	if math.Abs(predict.Loc[0])<threshold {
 		predict.Loc[0] = 0
 	}
-	if predict.Loc[2]<threshold {
+	if math.Abs(predict.Loc[2])<threshold {
 		predict.Loc[2] = 0
 	}
-	if !NoCollision(predict.Loc[0], predict.Loc[1], predict.Loc[2], input.World) {
+	debug("Source coordinate ", input.World[source])
+	debug("Target coordinate ", input.World[target])
+	debug("Predicted Location", predict)
+	/*if !NoCollision(predict.Loc[0], predict.Loc[1], predict.Loc[2], input.World) {
 		ret.Error = ErrPredictionCollision.Error()
-	}
+	}*/
 	ret.World = append(ret.World, predict)
 	ret.Version = input.Version
 	return ret

@@ -7,6 +7,7 @@ import (
 	"github.com/junpengxiao/BlockWorldServer/bwStruct"
 	"io/ioutil"
 	"net/http"
+	"log"
 	//"github.com/gorilla/mux"
 )
 
@@ -94,6 +95,7 @@ func Query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	result := bwModel.ProcessData(data)
+	log.Println("Result is", result)
 	//result := data
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated)
