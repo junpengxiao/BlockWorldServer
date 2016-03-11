@@ -17,13 +17,13 @@ func check(x1, x2, d float64) bool {
 	return true
 }
 
-func NoCollision(loc [3]float64, x, y, z float64, world []bwStruct.BWBlock) bool {
-	if len(loc) != 3 {
+func NoCollision(x, y, z float64, world []bwStruct.BWBlock) bool {
+	/*if len(loc) != 3 {
 		return false
-	}
-	x += loc[0]
+	}*/
+	//x += loc[0]
 	//y += loc[1]
-	z += loc[2]
+	//z += loc[2]
 	if x < delta/2-1 || x > 1-delta/2 {
 		return false
 	}
@@ -48,7 +48,7 @@ func ModelSampleProcessor(input bwStruct.BWData) (output bwStruct.BWData) {
 	block := input.World[0]
 	for _, tx := range dx {
 		for _, tz := range dz {
-			if NoCollision(block.Loc, tx, 0, tz, input.World) {
+			if NoCollision(tx+block.Loc[0], 0, tz+block.Loc[2], input.World) {
 				block.Loc[0] += tx
 				block.Loc[2] += tz
 				output.World = append(output.World, block)

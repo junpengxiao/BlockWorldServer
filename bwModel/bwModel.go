@@ -2,6 +2,7 @@ package bwModel
 
 import (
 	"github.com/junpengxiao/BlockWorldServer/bwStruct"
+	"os/exec"
 )
 
 //function signature. used for different models. To change model
@@ -13,6 +14,9 @@ var processor modelProcess
 func init() {
 	//processor = ModelSampleProcessor
 	processor = ModelAProcessor
+	//launch Julia server to load model into memory
+	go exec.Command("julia", "ModelA.jl")
+
 }
 
 func ProcessData(input bwStruct.BWData) bwStruct.BWData {

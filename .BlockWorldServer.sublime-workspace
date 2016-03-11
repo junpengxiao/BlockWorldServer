@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"mdel",
+				"modelnames"
+			],
+			[
+				"model",
+				"modelnames"
+			],
+			[
+				"mod",
+				"model3"
+			],
+			[
+				"mo",
+				"model2"
+			],
+			[
 				"han",
 				"Handle	 ƒ"
 			],
@@ -424,11 +440,13 @@
 	},
 	"file_history":
 	[
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelA.jl",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/Go_Julia_Interaction/jlserver.jl",
+		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/.BlockWorldServer.sublime-project",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwRouter/logger.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/test/test.jl",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/test/launchjl.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/test/ModelA.jl",
-		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelA.jl",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/test/test.data",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/bwModel.go",
 		"/Users/xiaojunpeng/workspace/gowork/src/github.com/junpengxiao/BlockWorldServer/bwModel/ModelA.go",
