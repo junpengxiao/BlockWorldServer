@@ -75,7 +75,7 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 		nums[i], _ = strconv.Atoi(v)
 		log.Println("results ", v, " nums: ", nums)
 	}
-	source, err := FindBlockByID(input.World, nums[0])
+	_, err := FindBlockByID(input.World, nums[0])
 	if err != nil {
 		ret.Error = ErrBlockIndexNotFound.Error()
 		return ret
