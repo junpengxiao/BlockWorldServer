@@ -78,7 +78,10 @@ while true
                 println(sock, result)
                 println("Predict Finished")
             end
-        catch err 
+        catch err
+            if isopen(sock)
+                println(sock,"0 0 0")
+            end
         end
     end
 end

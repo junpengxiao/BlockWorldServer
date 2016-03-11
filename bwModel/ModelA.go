@@ -21,6 +21,7 @@ var (
 	unkown     = "<unk>"
 	//variables used in model A
 	delta                  = 0.5 / 3
+	threshold              = 0.01 //if loc is below threshold, then treat it as 0
 	ErrPredictionError     = errors.New("Prediction didn't return a tuple that contains 3 elements")
 	ErrBlockIndexNotFound  = errors.New("Prediction returned index is not listed in world description")
 	ErrPredictionCollision = errors.New("Prediction collide with other block")
@@ -85,7 +86,7 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 		return ret
 	}
 	predict := input.World[target]
-	predict.Id = source
+	predict.Id = nums[0]
 	switch nums[2] {
 	case 1: //SW --
 		predict.Loc[0] -= delta
@@ -108,7 +109,12 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 	case 8: //S*-
 		predict.Loc[2] -= delta
 	}
-
+	if predict.Loc[0]<threshold {
+		predict.Loc[0] = 0
+	}
+	if predict.Loc[2]<threshold {
+		predict.Loc[2] = 0
+	}
 	if !NoCollision(predict.Loc[0], predict.Loc[1], predict.Loc[2], input.World) {
 		ret.Error = ErrPredictionCollision.Error()
 	}
@@ -117,8 +123,13 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 	return ret
 }
 
+func debug(str string, object interface{}) {
+	log.Println(str, ' ', object)
+}
+
 func ModelAProcessor(input bwStruct.BWData) bwStruct.BWData {
 	tokens := tok.Tokenize(strings.ToLower(input.Input)) //WARNING this may be not thread safe
+	debug("Tokens ", tokens)
 	vector := make([]int, 0, vectorLen)
 	for _, tk := range tokens {
 		if i, ok := dictionary[tk]; ok {
@@ -130,6 +141,7 @@ func ModelAProcessor(input bwStruct.BWData) bwStruct.BWData {
 	for len(vector) < vectorLen {
 		vector = append(vector, dictionary[unkown])
 	}
+	debug("vector", vector)
 	// put vector into model and grab the result
 	conn, err := net.Dial("tcp", "localhost:"+strconv.Itoa(port))
 	if err != nil {
@@ -141,8 +153,10 @@ func ModelAProcessor(input bwStruct.BWData) bwStruct.BWData {
 	for i := 1; i != len(vector); i++ {
 		str = str + " " + strconv.Itoa(vector[i])
 	}
+	debug("send str: ", str)
 	fmt.Fprintln(conn, str)
 	result, err := bufio.NewReader(conn).ReadString('\n')
+	debug("result", result)
 	if err != nil {
 		log.Println(err)
 		input.Error = err.Error()
