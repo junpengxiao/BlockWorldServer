@@ -8,6 +8,7 @@ The server contains 2 parts: a go server which handles in-come and out-come JSON
 
 ##Launching
 For now, it has to be launched manually. Use ModelA as an example
+
 1. go to bwModel folder, execute `julia ModelA.jl`. You should wait until see the message: `Listing at port XXXX`.
 2. back to BlockWorldServer folder, execute `go run main.go`. You should wait until see the message: `go Server starts`
 3. Now you can test servers.
