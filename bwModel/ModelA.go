@@ -7,9 +7,9 @@ import (
 	"github.com/junpengxiao/BlockWorldServer/bwStruct"
 	"github.com/srom/tokenizer"
 	"log"
+	"math"
 	"net"
 	"os"
-	"math"
 	"strconv"
 	"strings"
 )
@@ -89,31 +89,31 @@ func ModelABuildResult(input bwStruct.BWData, result string) (ret bwStruct.BWDat
 	predict := input.World[target]
 	predict.Id = nums[0]
 	switch nums[2] {
-	case 1: //SW --
-		predict.Loc[0] -= delta
-		predict.Loc[2] -= delta
-	case 2: //W  -*
-		predict.Loc[0] -= delta
-	case 3: //NW -+
-		predict.Loc[0] -= delta
-		predict.Loc[2] += delta
-	case 4: //N  *+
-		predict.Loc[2] += delta
-	case 5: //NE ++
+	case 1: //SW ++
 		predict.Loc[0] += delta
 		predict.Loc[2] += delta
-	case 6: //E  +*
+	case 2: //W  +*
 		predict.Loc[0] += delta
-	case 7: //SE +-
+	case 3: //NW +-
 		predict.Loc[0] += delta
 		predict.Loc[2] -= delta
-	case 8: //S*-
+	case 4: //N  *-
 		predict.Loc[2] -= delta
+	case 5: //NE --
+		predict.Loc[0] -= delta
+		predict.Loc[2] -= delta
+	case 6: //E  -*
+		predict.Loc[0] -= delta
+	case 7: //SE -+
+		predict.Loc[0] -= delta
+		predict.Loc[2] += delta
+	case 8: //S  *+
+		predict.Loc[2] += delta
 	}
-	if math.Abs(predict.Loc[0])<threshold {
+	if math.Abs(predict.Loc[0]) < threshold {
 		predict.Loc[0] = 0
 	}
-	if math.Abs(predict.Loc[2])<threshold {
+	if math.Abs(predict.Loc[2]) < threshold {
 		predict.Loc[2] = 0
 	}
 	debug("Source coordinate ", input.World[source])
