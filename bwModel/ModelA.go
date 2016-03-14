@@ -142,6 +142,11 @@ func ModelAProcessor(input bwStruct.BWData) bwStruct.BWData {
 			vector = append(vector, dictionary[unkown])
 		}
 	}
+	if len(vector) == 0 {
+		var ret bwStruct.BWData
+		ret.Error = "No hot words appears, no block moved"
+		return ret
+	}
 	for len(vector) < vectorLen {
 		vector = append(vector, dictionary[unkown])
 	}
