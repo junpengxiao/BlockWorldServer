@@ -9,8 +9,8 @@ The server contains 2 parts: a go server which handles in-come and out-come JSON
 ##Launching
 For now, it has to be launched manually. Use ModelA as an example
 
-1. go to bwModel folder, execute `julia ModelA.jl`. You should wait until see the message: `Listing at port XXXX`.
-2. back to BlockWorldServer folder, execute `go run main.go`. You should wait until see the message: `go Server starts`
+1. go to bwModel folder, execute `nohup julia ModelA.jl &`.
+2. back to BlockWorldServer folder, execute `nohup go run main.go &`.
 3. Now you can test servers.
 
 Julia server use 8081 by default while go use 8080. You can use this command to send JSON to server in terminal as a debug method:
